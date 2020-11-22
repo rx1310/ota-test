@@ -1,3 +1,9 @@
-# view AndroidManifest.xml #generated:20
+# view AndroidManifest.xml #generated:29
+-keep class com.loveplusplus.update.DownloadService { <init>(...); }
+
+# view AndroidManifest.xml #generated:33
+-keep class com.loveplusplus.update.UpdateApkFileProvider { <init>(...); }
+
+# view AndroidManifest.xml #generated:19
 -keep class rx1310.optinova.ota.MainActivity { <init>(...); }
 

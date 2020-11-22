@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MyApp</string>
-    <string name="hello_world">Hello, World!</string>
+    <string name="android_auto_update_dialog_title">title</string>
 
+    <string name="android_auto_update_notify_ticker">ticker</string>
+    <string name="android_auto_update_notify_content">content</string>
+
+    <string name="android_auto_update_dialog_btn_download">Download</string>
+    <string name="android_auto_update_dialog_btn_cancel">Cancel</string>
+
+    <string name="android_auto_update_toast_no_new_update">New!!</string>
+
+    <string name="android_auto_update_download_progress">:%1$d%%</string>
+
+    <string name="android_auto_update_dialog_checking">check...</string>
+
+<string name="app_name">auto-update-sample</string>
+<string name="hello_world">Hello world!</string>
 </resources>
