@@ -1,5 +1,6 @@
 {
   "url":"https://github.com/devreader/app-android/releases/download/12/app-release.apk",
   "versionCode":4,
-  "updateMessage":"- First build\n- Fix errors"
+"versionName": "OptiNova 6.2.12",
+  "updateMessage":"Первая сборка, а также многочисленные исправления, фиксы, переделки, а вообще текст просто так пишу для заполнения места."
 }
