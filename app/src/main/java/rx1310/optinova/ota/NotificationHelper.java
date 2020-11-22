@@ -1,4 +1,4 @@
-package com.loveplusplus.update;
+package rx1310.optinova.ota;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,66 +12,64 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import rx1310.optinova.ota.R;
 
-/**
- * @author feicien (ithcheng@gmail.com)
- * @since 2018-04-07 16:49
- */
 public class NotificationHelper extends ContextWrapper {
 
     private NotificationManager manager;
 
     private static String CHANNEL_ID = "dxy_app_update";
-
     private static final int NOTIFICATION_ID = 0;
 
     public NotificationHelper(Context base) {
+		
         super(base);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, "应用更新", NotificationManager.IMPORTANCE_LOW);
-            mChannel.setDescription("应用有新版本");
-            mChannel.enableLights(true); //是否在桌面icon右上角展示小红点
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, "Channel", NotificationManager.IMPORTANCE_LOW);
+            mChannel.setDescription("Desc notif");
+            mChannel.enableLights(true);
             getManager().createNotificationChannel(mChannel);
+			
         }
+		
     }
 
-    /**
-     * Show Notification
-     */
     public void showNotification(String content, String apkUrl) {
 
         Intent myIntent = new Intent(this, DownloadService.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         myIntent.putExtra(Constants.APK_DOWNLOAD_URL, apkUrl);
+		
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = getNofity(content)
-                .setContentIntent(pendingIntent);
+        NotificationCompat.Builder builder = getNofity(content).setContentIntent(pendingIntent);
 
         getManager().notify(NOTIFICATION_ID, builder.build());
+		
     }
 
 
     public void updateProgress(int progress) {
-
-
+		
         String text = this.getString(R.string.android_auto_update_download_progress, progress);
-
+		
         PendingIntent pendingintent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-        NotificationCompat.Builder builder = getNofity(text)
-                .setProgress(100, progress, false)
-                .setContentIntent(pendingintent);
-
+        NotificationCompat.Builder builder;
+		
+		builder = getNofity(text);
+		builder.setProgress(100, progress, false);
+		builder.setContentIntent(pendingintent);
+		
         getManager().notify(NOTIFICATION_ID, builder.build());
+		
     }
 
     private NotificationCompat.Builder getNofity(String text) {
+		
         return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setTicker(getString(R.string.android_auto_update_notify_ticker))
-                .setContentTitle("应用更新")
+                .setContentTitle("Title")
                 .setContentText(text)
                 .setSmallIcon(getSmallIcon())
                 .setLargeIcon(getLargeIcon())
@@ -86,27 +84,37 @@ public class NotificationHelper extends ContextWrapper {
 
 
     private int getSmallIcon() {
-        //设置 nofication 的图标 直接读取小米推送配置的图标
-        int icon = getResources().getIdentifier("mipush_small_notification", "drawable", getPackageName());
+        
+		int icon = getResources().getIdentifier("mipush_small_notification", "drawable", getPackageName());
+		
         if (icon == 0) {
             icon = getApplicationInfo().icon;
         }
 
         return icon;
+		
     }
 
     private Bitmap getLargeIcon() {
+		
         int bigIcon = getResources().getIdentifier("mipush_notification", "drawable", getPackageName());
+		
         if (bigIcon != 0) {
             return BitmapFactory.decodeResource(getResources(), bigIcon);
         }
+		
         return null;
+		
     }
 
     private NotificationManager getManager() {
+		
         if (manager == null) {
             manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         }
+		
         return manager;
+		
     }
+	
 }

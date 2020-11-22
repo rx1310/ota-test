@@ -1,4 +1,4 @@
-package com.loveplusplus.update;
+package rx1310.optinova.ota;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,9 +9,10 @@ import rx1310.optinova.ota.R;
 
 class UpdateDialog {
 
-
     static void show(final Context context, String content, final String downloadUrl) {
+		
         if (isContextValid(context)) {
+			
             new AlertDialog.Builder(context)
                     .setTitle(R.string.android_auto_update_dialog_title)
                     .setMessage(content)
@@ -39,4 +40,5 @@ class UpdateDialog {
         intent.putExtra(Constants.APK_DOWNLOAD_URL, downloadUrl);
         context.startService(intent);
     }
+	
 }

@@ -1,4 +1,4 @@
-package com.loveplusplus.update;
+package rx1310.optinova.ota;
 
 class Constants {
 
@@ -16,5 +16,5 @@ class Constants {
 
     static final String TAG = "UpdateChecker";
 
-    static final String UPDATE_URL = "https://raw.githubusercontent.com/feicien/android-auto-update/develop/extras/update.json";
+    static final String UPDATE_URL = "https://raw.githubusercontent.com/rx1310/ota-test/master/update.json";
 }
